@@ -156,12 +156,12 @@ checkout** — otherwise the first page saved in `/admin.php` makes the next
 ```bash
 mkdir -p ~/content
 cp -R content/. ~/content/
-cp config/roles.yml ~/content/roles.yml     # put the real address in this copy
+cp users.yml ~/content/users.yml     # put the real address in this copy
 
 cat > .env <<'EOF'
 SITE_BASE_URL=https://dopamine-flatcms-demo.fotispan.gr
 CONTENT_PATH=/home/fotispan-dopamine-flatcms-demo/content
-ROLES_FILE=/home/fotispan-dopamine-flatcms-demo/content/roles.yml
+USERS_FILE=/home/fotispan-dopamine-flatcms-demo/content/users.yml
 ADMIN_LOCALE=en
 EOF
 

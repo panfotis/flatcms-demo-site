@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72d3cdcd9844d96dd111161c7db71acf",
+    "content-hash": "141be8381f75770e4b70832f5c065f78",
     "packages": [
         {
             "name": "doctrine/lexer",
@@ -85,16 +85,16 @@
         },
         {
             "name": "dopamine/flatcms",
-            "version": "v2.0.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/panfotis/dopamine-flatcms.git",
-                "reference": "9450dab6a642256602ee40f76f7a4bc530d97c9a"
+                "reference": "845faeb9291c526e33ee5655e4562f83c6e60635"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/panfotis/dopamine-flatcms/zipball/9450dab6a642256602ee40f76f7a4bc530d97c9a",
-                "reference": "9450dab6a642256602ee40f76f7a4bc530d97c9a",
+                "url": "https://api.github.com/repos/panfotis/dopamine-flatcms/zipball/845faeb9291c526e33ee5655e4562f83c6e60635",
+                "reference": "845faeb9291c526e33ee5655e4562f83c6e60635",
                 "shasum": ""
             },
             "require": {
@@ -135,9 +135,9 @@
             "description": "Flat-file CMS for small client sites. Locked components, text-only editing, Cloudflare Access auth, R2 media, edge cache purge.",
             "support": {
                 "issues": "https://github.com/panfotis/dopamine-flatcms/issues",
-                "source": "https://github.com/panfotis/dopamine-flatcms/tree/v2.0.0"
+                "source": "https://github.com/panfotis/dopamine-flatcms/tree/v3.0.0"
             },
-            "time": "2026-08-21T09:58:01+00:00"
+            "time": "2026-08-21T12:49:49+00:00"
         },
         {
             "name": "egulias/email-validator",

@@ -1,0 +1,35 @@
+/vendor/
+/var/cache/
+/var/*.log
+.env
+*.bak
+*.tmp
+var/locks/
+
+# Visitor PII. This must never reach a git remote: the content repository is
+# pushed hourly, and a name, an email and a message replicated to a remote with
+# no retention limit and no erasure path is the GDPR problem this whole
+# directory layout exists to avoid. Backed up separately, encrypted, 30 days.
+var/submissions/
+
+# content/ is deliberately NOT ignored — not uploads.
+#
+# They used to be. public/uploads/ was gitignored and nothing copied it
+# anywhere, so a lost box restored every page perfectly with every image on it
+# broken. Uploads are hash-suffixed, so replacing an image writes a new blob
+# instead of rewriting an old one, which is the usual reason binaries in git go
+# bad. Thirty to eighty images at store_max_edge is 25–100 MB: nothing.
+#
+# This stops being right at a gallery site or past a few hundred MB. That site
+# sets R2_ENABLED=1 and the paths stop being local; see README "The ceiling".
+
+# Revisions ARE tracked in a site's content repository, where they are the
+# restore points a client actually needs. This is not that repository — it is
+# the demo's *code* repo, and these are one developer's undo history, rewritten
+# on every save. Tracking them here is churn on every local edit and restores
+# nothing that content/pages/ does not already hold.
+/content/.revisions/
+
+# Superseded by theme/demo.pen, which is larger, newer, and the copy the theme
+# repo publishes. Kept on disk rather than deleted until it is confirmed dead.
+/demo.pen

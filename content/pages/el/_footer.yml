@@ -1,0 +1,12 @@
+# Managed by Dopamine FlatCMS. Structure is edited here, content in /admin.
+title: Υποσέλιδο
+blocks:
+- id: footer
+  type: site_footer
+  fields:
+    note: Φτιαγμένο και συντηρούμενο από τον Fotis Panokis.
+    links:
+    - label: GitHub
+      url: https://github.com/panfotis/dopamine-flatcms
+    - label: Packagist
+      url: https://packagist.org/packages/dopamine/flatcms

@@ -1,0 +1,58 @@
+# Managed by Dopamine FlatCMS. Structure is edited here, content in /admin.
+title: Επικοινωνία
+slug: /epikoinonia
+# v1 policy: pages carrying a form are private and bypass edge caching. The
+# form lands in Phase 7; the caching decision is made now so Phase 7 cannot
+# quietly ship a cached CSRF token. See Cms::cacheHeaders().
+private: true
+# Where this page sits in the menu. Developer-owned: the client
+# cannot reorder or rename the navigation from the panel. Omit the
+# key entirely and the page stays reachable but unlisted.
+nav:
+  label: Επικοινωνία
+  order: 40
+seo:
+  title: ''
+  description: 'Στοιχεία επικοινωνίας.'
+  og_image:
+    src: ''
+    alt: ''
+    width: 0
+    height: 0
+  noindex: false
+  canonical: ''
+blocks:
+  -
+    id: hero
+    type: hero
+    fields:
+      heading: Επικοινωνία
+      subheading: 'Απαντάμε συνήθως εντός μίας εργάσιμης.'
+      image:
+        src: /uploads/2026/08/pexels-zetong-li-880728-13724339.jpg
+        alt: ''
+        width: 1920
+        height: 1440
+      cta_label: ''
+      cta_url: ''
+      align: start
+  -
+    id: details
+    type: contact_cta
+    fields:
+      heading: Στοιχεία
+      phone: '+30 210 0000000'
+      email: hello@example.gr
+      address: |-
+        Αθήνα
+        Ελλάδα
+  -
+    id: form
+    type: contact_form
+    fields:
+      heading: 'Στείλτε μας μήνυμα'
+      intro: 'Συμπληρώστε τα στοιχεία σας και απαντάμε εντός μίας εργάσιμης.'
+      success: 'Ευχαριστούμε! Λάβαμε το μήνυμά σας και θα επικοινωνήσουμε σύντομα.'
+      consent_text: 'Συμφωνώ να επικοινωνήσετε μαζί μου για το αίτημά μου.'
+      recipient: ''
+      turnstile: false

@@ -1,0 +1,4 @@
+[submodule "theme"]
+	path = theme
+	url = git@github.com:panfotis/flatcms-theme-demo.git
+	branch = main

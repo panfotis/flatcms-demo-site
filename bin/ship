@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+#
+# Ship the demo: validate, refresh the theme's seed content, commit and push
+# both repositories.
+#
+#   bin/ship "hero: bigger type"
+#
+# ponytail: one command because the theme and the site are one deliverable.
+# Two commits and a push is three chances to forget one, and the one people
+# forget is the seed — it is the only copy that has no failing test, no broken
+# page and no way to notice it rotted.
+
+set -euo pipefail
+
+msg="${1:?usage: bin/ship <message>}"
+cd "$(dirname "$0")/.."
+
+[ -d theme/.git ] || { echo "ship: theme/ is not a git repository" >&2; exit 1; }
+
+# bin/doctor is a bash wrapper around vendor/bin/doctor, not a PHP file — `php
+# bin/doctor` silently echoes the script instead of running it. It needs PHP 8.4,
+# and the host has 8.3, so it runs in the container. Skipped rather than fatal: a
+# stopped container is a reason to warn, not a reason to block a push.
+if ddev describe >/dev/null 2>&1; then
+  echo "── Checking the site"
+  ddev exec bin/doctor --quiet || { echo "ship: bin/doctor failed, not shipping" >&2; exit 1; }
+else
+  echo "ship: ddev is not running — skipping bin/doctor" >&2
+fi
+
+# theme/_demo-content/ is the copy people get when they clone the theme, and
+# nothing syncs it. It has already drifted once: a `cta_url` left in the old
+# scalar form after that field became `type: link`, which is a malformed page
+# for whoever clones next.
+#
+# content/ is the source of truth — it is what the panel writes, in the format
+# the current schemas produce. --delete so a page removed here is removed there
+# too. .gitkeep is excluded, which under rsync also protects it from --delete.
+echo "── Refreshing the theme's seed content"
+rsync -a --delete --exclude=.gitkeep content/pages/   theme/_demo-content/pages/
+rsync -a --delete --exclude=.gitkeep content/uploads/ theme/_demo-content/uploads/
+
+# --quiet exits non-zero when there IS something staged, so `||` reads as
+# "commit only if this repo has changes" and a one-sided edit is not an error.
+echo "── Committing"
+git -C theme add -A
+git -C theme diff --cached --quiet || git -C theme commit -q -m "$msg"
+
+git add -A
+git diff --cached --quiet || git commit -q -m "$msg"
+
+# Pushes theme/ first when it has unpushed commits, then this repo — so the
+# gitlink this commit records always resolves on the remote.
+echo "── Pushing"
+git push --recurse-submodules=on-demand
+
+echo
+echo "Shipped: $(git log --oneline -1)"
+echo "  theme: $(git -C theme log --oneline -1)"

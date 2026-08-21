@@ -1,0 +1,57 @@
+# Managed by Dopamine FlatCMS. Structure is edited here, content in /admin.
+title: Σχετικά
+slug: /about
+nav:
+  label: Σχετικά
+  order: 30
+seo:
+  title: ''
+  description: 'Ποιος φτιάχνει το Dopamine FlatCMS και γιατί.'
+  og_image:
+    src: ''
+    alt: ''
+    width: 0
+    height: 0
+  noindex: false
+  canonical: ''
+blocks:
+  -
+    id: hero
+    type: hero
+    fields:
+      heading: 'Σχετικά'
+      subheading: 'Ποιος το φτιάχνει, και γιατί.'
+      lede: ''
+      image:
+        src: ''
+        alt: ''
+        width: 0
+        height: 0
+      cta_label: ''
+      cta_url: ''
+      cta2_label: ''
+      cta2_url: ''
+      align: start
+  -
+    id: story
+    type: prose
+    fields:
+      body: '<p>Το Dopamine FlatCMS το φτιάχνει και το συντηρεί ο <strong>Φώτης Πανώκης</strong>, developer στην Αθήνα. Βγήκε από ένα μοτίβο που όλο επαναλαμβανόταν: ένα site πέντε σελίδων να κουβαλάει βάση δεδομένων, στοίβα από plugins και πρόγραμμα updates που δεν χρειάστηκε ποτέ — κι έναν πελάτη που το μόνο που ήθελε ήταν να αλλάξει μια πρόταση και μια φωτογραφία.</p><p>Αυτή είναι η εκδοχή χωρίς όλα αυτά. Ο κανόνας πάνω στον οποίο κρέμεται το όλο πράγμα: <strong>η δομή ανήκει στον developer και ζει σε αρχεία· το περιεχόμενο ανήκει στον πελάτη και αλλάζει στο panel.</strong> Όλα τα υπόλοιπα έπονται.</p>'
+  -
+    id: fluid
+    type: text_image
+    fields:
+      heading: 'Η οικογένεια Dopamine'
+      body: '<p>Η εμφάνιση αυτού του demo έρχεται από το <a href="https://panfotis.github.io/dopamine-fluid-css/">Dopamine Fluid</a> — μια fluid CSS utility βιβλιοθήκη από τον ίδιο δημιουργό. Το όνομα της class είναι το spec: τυπογραφία, αποστάσεις και grids που κλιμακώνονται ομαλά από mobile μέχρι ultrawide, με μηδενικό runtime.</p>'
+      image:
+        src: /uploads/2026/08/pexels-willianjusten-30929497.jpg
+        alt: 'Άνθρωπος μπροστά σε λίμνη κάτω από εντυπωσιακά σύννεφα'
+        width: 3859
+        height: 2573
+      media_side: start
+  -
+    id: license
+    type: callout
+    fields:
+      title: 'MIT license. Πάρ''το, κάν''το fork, βγάλε sites.'
+      body: 'Το engine είναι το dopamine/flatcms στο Packagist· αυτό το theme είναι σημείο εκκίνησης, όχι dependency. Αν σου γλιτώσει ένα συμβόλαιο συντήρησης, έκανε τη δουλειά του.'

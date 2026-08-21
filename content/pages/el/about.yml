@@ -36,13 +36,13 @@ blocks:
     id: story
     type: prose
     fields:
-      body: '<p>Το Dopamine FlatCMS το φτιάχνει και το συντηρεί ο <strong>Φώτης Πανώκης</strong>, developer στην Αθήνα. Βγήκε από ένα μοτίβο που όλο επαναλαμβανόταν: ένα site πέντε σελίδων να κουβαλάει βάση δεδομένων, στοίβα από plugins και πρόγραμμα updates που δεν χρειάστηκε ποτέ — κι έναν πελάτη που το μόνο που ήθελε ήταν να αλλάξει μια πρόταση και μια φωτογραφία.</p><p>Αυτή είναι η εκδοχή χωρίς όλα αυτά. Ο κανόνας πάνω στον οποίο κρέμεται το όλο πράγμα: <strong>η δομή ανήκει στον developer και ζει σε αρχεία· το περιεχόμενο ανήκει στον πελάτη και αλλάζει στο panel.</strong> Όλα τα υπόλοιπα έπονται.</p>'
+      body: '<p>Το Dopamine FlatCMS το φτιάχνει και το συντηρεί ο <strong>Fotis Panokis</strong>, developer στην Αθήνα. Ξεκίνησε από ένα μοτίβο που επέμενε να επαναλαμβάνεται: site πέντε σελίδων να κουβαλάει βάση δεδομένων, στοίβα από plugins και πρόγραμμα updates που δεν χρειάστηκαν ποτέ - και πελάτη που το μόνο που ήθελε ήταν να αλλάξει μια πρόταση και μια φωτογραφία.</p><p>Αυτό εδώ είναι η εκδοχή χωρίς όλα τα παραπάνω. Όλο το σύστημα στηρίζεται σε έναν κανόνα: <strong>η δομή ανήκει στον developer και ζει σε αρχεία, το περιεχόμενο ανήκει στον πελάτη και αλλάζει από το panel.</strong> Όλα τα υπόλοιπα βγαίνουν από εκεί.</p>'
   -
     id: fluid
     type: text_image
     fields:
       heading: 'Η οικογένεια Dopamine'
-      body: '<p>Η εμφάνιση αυτού του demo έρχεται από το <a href="https://panfotis.github.io/dopamine-fluid-css/">Dopamine Fluid</a> — μια fluid CSS utility βιβλιοθήκη από τον ίδιο δημιουργό. Το όνομα της class είναι το spec: τυπογραφία, αποστάσεις και grids που κλιμακώνονται ομαλά από mobile μέχρι ultrawide, με μηδενικό runtime.</p>'
+      body: '<p>Η εμφάνιση του demo βασίζεται στο <a href="https://panfotis.github.io/dopamine-fluid-css/">Dopamine Fluid</a> - μια fluid CSS utility βιβλιοθήκη από τον ίδιο δημιουργό. Το όνομα της class είναι και το spec της: τυπογραφία, αποστάσεις και grids που κλιμακώνονται ομαλά από το κινητό ώς την ultrawide, με μηδενικό runtime.</p>'
       image:
         src: /uploads/2026/08/pexels-willianjusten-30929497.jpg
         alt: 'Άνθρωπος μπροστά σε λίμνη κάτω από εντυπωσιακά σύννεφα'
@@ -53,5 +53,5 @@ blocks:
     id: license
     type: callout
     fields:
-      title: 'MIT license. Πάρ''το, κάν''το fork, βγάλε sites.'
-      body: 'Το engine είναι το dopamine/flatcms στο Packagist· αυτό το theme είναι σημείο εκκίνησης, όχι dependency. Αν σου γλιτώσει ένα συμβόλαιο συντήρησης, έκανε τη δουλειά του.'
+      title: 'MIT license. Πάρ''το, κάν''το fork, βγάλε site.'
+      body: 'Το engine είναι το dopamine/flatcms στο Packagist - το theme είναι σημείο εκκίνησης, όχι dependency. Αν σου γλιτώσει έστω ένα συμβόλαιο συντήρησης, έκανε τη δουλειά του.'

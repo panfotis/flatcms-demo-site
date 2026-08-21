@@ -1,5 +1,5 @@
 # Managed by Dopamine FlatCMS. Structure is edited here, content in /admin.
-# Same id as el/epikoinonia.yml — a different slug is the whole point of one
+# Same id as el/epikoinonia.yml - a different slug is the whole point of one
 # file per language, and a `link` field storing the id survives both.
 title: Contact
 slug: /contact

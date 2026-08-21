@@ -4,7 +4,7 @@ blocks:
 - id: footer
   type: site_footer
   fields:
-    note: Φτιαγμένο και συντηρούμενο από τον Fotis Panokis.
+    note: Το φτιάχνει και το συντηρεί ο Fotis Panokis.
     links:
     - label: GitHub
       url: https://github.com/panfotis/dopamine-flatcms

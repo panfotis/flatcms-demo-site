@@ -6,7 +6,7 @@ nav:
   order: 10
 seo:
   title: ''
-  description: 'Dopamine FlatCMS — just files, just works.'
+  description: 'Dopamine FlatCMS - just files, just works.'
   og_image:
     src: ''
     alt: ''
@@ -21,7 +21,7 @@ blocks:
     fields:
       heading: 'Dopamine FlatCMS'
       subheading: 'Just files. Just works.'
-      lede: 'No database. No build step. No setup. A page is a file, a section is a folder — and the panel builds itself.'
+      lede: 'No database. No build step. No setup. A page is a file, a section is a folder - and the panel builds itself.'
       image:
         src: ''
         alt: ''
@@ -42,13 +42,13 @@ blocks:
     id: intro
     type: prose
     fields:
-      body: "<p>Write a YAML file. Get a page. That's it. Copy a folder, get a component. The admin panel reads your schema and builds itself — nothing to configure, nothing to install, nothing to update at 2am.</p><p><strong>Structure is yours. Content is theirs. Nothing breaks.</strong></p>"
+      body: "<p>Write a YAML file. Get a page. That's it. Copy a folder, get a component. The admin panel reads your schema and builds itself - nothing to configure, nothing to install, nothing to update at 2am.</p><p><strong>Structure is yours. Content is theirs. Nothing breaks.</strong></p>"
   -
     id: scope
     type: callout
     fields:
       title: 'All the CMS your client needs. None of the bloat.'
-      body: 'They edit text, images and content in a clean panel — you skip the database, the plugins and the update treadmill. Built for small sites, 3 to 15 pages. Need a blog, a shop, user accounts? That is a job for a full CMS — this is not one, on purpose.'
+      body: 'They edit text, images and content in a clean panel - you skip the database, the plugins and the update treadmill. Built for small sites, 3 to 15 pages: brochure sites, portfolios, landing pages.'
   -
     id: features
     type: feature_grid
@@ -72,11 +72,11 @@ blocks:
           color: peach
         -
           title: 'Cloudflare Access'
-          body: 'No passwords to lose — log in with your team email.'
+          body: 'No passwords to lose - log in with your team email.'
           chips: zero-trust
           color: mint
         -
-          title: 'Media in git — or R2'
+          title: 'Media in git - or R2'
           body: 'Uploads are versioned in git with your content and served as responsive WebP. Media-heavy site? One flag moves them to Cloudflare R2.'
           chips: 'git, r2, webp'
           color: lemon
@@ -97,7 +97,7 @@ blocks:
           color: lilac
         -
           title: 'Fast by default'
-          body: 'No queries, no runtime bloat — and full-page CDN caching when Cloudflare sits in front.'
+          body: 'No database, no queries. Every page ships ready for full-page edge caching, with tags that purge themselves on every save.'
           chips: 'no build'
           color: sky
   -
@@ -105,7 +105,7 @@ blocks:
     type: text_image
     fields:
       heading: 'The client edits only text'
-      body: '<p>There is no "add section" button. No drag &amp; drop. The client sees the fields you give them — nothing else. The page you designed stays the page you designed.</p>'
+      body: '<p>There is no "add section" button. No drag &amp; drop. The client sees the fields you give them - nothing else. The page you designed stays the page you designed.</p>'
       image:
         src: /uploads/2026/08/pexels-zetong-li-880728-13724339.jpg
         alt: 'Mountain landscape at dusk'
@@ -127,18 +127,18 @@ blocks:
           answer: '<p>No. Every page is one YAML file.</p>'
         -
           question: 'Are the forms spam-protected?'
-          answer: '<p>Yes — CSRF token, honeypot and optional Cloudflare Turnstile. Submissions are stored and mailed to you.</p>'
+          answer: '<p>Yes - CSRF token, honeypot and optional Cloudflare Turnstile. Submissions are stored and mailed to you.</p>'
         -
           question: 'What if the client deletes something by mistake?'
           answer: '<p>Every save keeps a revision you can restore, and the content lives in Git.</p>'
         -
           question: 'Multiple languages?'
-          answer: '<p>Yes, with per-language slugs — this site serves /contact in English and /el/epikoinonia in Greek.</p>'
+          answer: '<p>Yes, with per-language slugs - this site serves /contact in English and /el/epikoinonia in Greek.</p>'
   -
     id: gallery
     type: gallery
     fields:
-      heading: 'Our work'
+      heading: Gallery
       photos:
         -
           src: /uploads/2026/08/pexels-willianjusten-30929497.jpg
@@ -154,7 +154,7 @@ blocks:
     id: video
     type: video
     fields:
-      heading: 'See how it works'
+      heading: 'The video component'
       embed:
         provider: youtube
         id: dQw4w9WgXcQ

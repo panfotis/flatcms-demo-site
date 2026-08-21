@@ -1,18 +1,19 @@
-# An nginx virtual host for a deployed site — nothing in the CMS reads this
-# file. Copy it to /etc/nginx/sites-available/, then edit the certificate
-# path and the php-fpm socket. DDEV writes its own vhost; this is for the
-# server. apache.conf.example beside it is the same vhost for Apache.
+# The nginx virtual host for dopamine-flatcms-demo.fotispan.gr — nothing in the
+# CMS reads this file. Copy it to /etc/nginx/sites-available/, symlink it into
+# sites-enabled/, and check the php-fpm socket path matches this box. DDEV
+# writes its own vhost, so this is only for the server.
 server {
     listen 443 ssl http2;
-    server_name example-domain.com;
+    server_name dopamine-flatcms-demo.fotispan.gr;
 
-    # current is the atomic release symlink. content/, src/, vendor/ and
-    # config.php sit above its public/ docroot and are never reachable over HTTP.
-    root /var/www/example-domain/current/public;
+    # No `current` symlink: this site deploys with `git pull`, not with the
+    # atomic-release layout. content/, vendor/ and config.php sit above the
+    # public/ docroot and are never reachable over HTTP.
+    root /var/www/dopamine-flatcms-demo/public;
     index index.php;
 
-    ssl_certificate     /etc/letsencrypt/live/example-domain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/example-domain.com/privkey.pem;
+    ssl_certificate     /etc/letsencrypt/live/dopamine-flatcms-demo.fotispan.gr/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/dopamine-flatcms-demo.fotispan.gr/privkey.pem;
 
     # The real visitor address, and the reason the contact form's rate limiter
     # works at all. Behind Cloudflare every request arrives from Cloudflare, so
@@ -24,8 +25,9 @@ server {
     # header cannot be forged by anyone reaching the origin directly. PHP then
     # sees a REMOTE_ADDR that is already correct and trusts nothing.
     #
-    # Refresh the ranges from cloudflare.com/ips/ on a cron — they change, and
-    # a stale list silently reverts you to one bucket. Both families:
+    # Create it before the first `nginx -t`, or the include fails and nginx
+    # refuses to start. Refresh from a cron — the ranges change, and a stale
+    # list silently reverts you to one bucket:
     #   curl -s https://www.cloudflare.com/ips-v4 https://www.cloudflare.com/ips-v6 \
     #     | sed 's/^/set_real_ip_from /; s/$/;/' > /etc/nginx/cloudflare-ips.conf
     include /etc/nginx/cloudflare-ips.conf;
@@ -42,7 +44,7 @@ server {
     # verifies the Access JWT so the origin cannot be hit directly.
     location = /admin.php {
         include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php8.4-fpm-example-domain.sock;
+        fastcgi_pass unix:/run/php/php8.4-fpm.sock;
 
         # Never let the panel be cached anywhere.
         add_header Cache-Control "no-store, private" always;
@@ -50,19 +52,19 @@ server {
 
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php8.4-fpm-example-domain.sock;
+        fastcgi_pass unix:/run/php/php8.4-fpm.sock;
     }
 
-    # Uploads live in the content repository, not under the docroot, so that
-    # one `git clone` of shared/content/ restores the pages *and* the images on
-    # them. An alias rather than a symlink: nothing inside public/ then points
-    # outside it, and stored `src` values stay `/uploads/...` either way, so
-    # config.media_bases and /cdn-cgi/image are unaffected by the move.
+    # CONTENT_PATH, not the checkout: the panel writes here, and it must survive
+    # every `git pull`. An alias rather than a symlink, so nothing inside public/
+    # points outside it, and stored `src` values stay `/uploads/...` either way.
     #
-    # Only used when R2_ENABLED=0. With R2 on, these URLs are absolute and never
-    # reach this server at all.
+    # Keep this even with R2_ENABLED=1. New uploads get absolute R2 URLs and
+    # never reach this server, but every image saved before R2 was switched on
+    # is still referenced as /uploads/... — drop this block and the demo 404s
+    # its own pictures.
     location /uploads/ {
-        alias /var/www/example-domain/shared/content/uploads/;
+        alias /srv/dopamine-flatcms-demo-content/uploads/;
         expires 30d;
         add_header Cache-Control "public, immutable";
         # Uploaded files are never executed, whatever their extension. This is
@@ -79,6 +81,6 @@ server {
 
 server {
     listen 80;
-    server_name example-domain.com;
+    server_name dopamine-flatcms-demo.fotispan.gr;
     return 301 https://$host$request_uri;
 }

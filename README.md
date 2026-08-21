@@ -106,16 +106,71 @@ ship becomes the theme's starter content. `bin/doctor` catches broken YAML, not
 a half-written page. `git -C theme status --short` before shipping if you have
 been mid-edit.
 
+### Which way content flows
+
+```
+   /admin.php (laptop)          bin/ship               people cloning
+        │                          │                    the theme
+        ▼                          ▼                        ▲
+    content/  ───── rsync ──▶ theme/_demo-content/ ──────────┘
+
+   /admin.php (server)
+        │
+        ▼
+  /srv/…-content/   ← live demo. Flows nowhere. Deliberate.
+```
+
+`content/` on **this machine** is the source of truth for the demo, and
+`bin/ship` is the only thing that syncs it into the theme.
+
+Pages you edit in the panel **on the server** stay on the server. Nothing pulls
+them back, `bin/ship` will not publish them, and the two copies simply diverge.
+That is intended: the server instance is for exercising the panel, R2 and
+Cloudflare Access, not for authoring. Nothing is destroyed either way —
+`bin/ship` never touches the server, and `git pull` never touches
+`CONTENT_PATH`.
+
+If a page authored on the server should become part of the demo, bring it down
+deliberately, then ship from here:
+
+```bash
+rsync -a <server>:/srv/dopamine-flatcms-demo-content/pages/ content/pages/
+bin/ship "content: promote the page written on the demo"
+```
+
+Do the same for `uploads/` only if R2 is off; with `R2_ENABLED=1` new images
+live in the bucket and are referenced by absolute URL, so they are not in
+`content/uploads/` to copy.
+
 ### On a server
 
 The panel writes to `content/`, so on a server that directory must live
-**outside the checkout** — otherwise every `git pull` collides with the client's
-edits. Set `CONTENT_PATH` (and `ROLES_FILE`, to keep real addresses out of a
-public repo) in the server's `.env`:
+**outside the checkout** — otherwise every `git pull` collides with the edits.
+Set `CONTENT_PATH` (and `ROLES_FILE`, to keep real addresses out of the repo)
+in the server's `.env`:
 
 ```
-CONTENT_PATH=/srv/theme-demo-content
-ROLES_FILE=/srv/theme-demo-content/roles.yml
+CONTENT_PATH=/srv/dopamine-flatcms-demo-content
+ROLES_FILE=/srv/dopamine-flatcms-demo-content/roles.yml
 ```
 
-Then updating the site is `git pull && composer install --no-dev -o`.
+The checkout keeps its own tracked `content/` directory, which the running site
+then ignores. Harmless, but do not edit it on the server expecting to see a
+change — it is the seed for a fresh install, not the live content.
+
+This repository is **private**, so the server needs an SSH key on the account
+(not a repo deploy key — that would not also reach the `theme` submodule):
+
+```bash
+ssh-keygen -t ed25519 -C "flatcms demo server" -f ~/.ssh/id_ed25519 -N ""
+cat ~/.ssh/id_ed25519.pub          # paste into github.com/settings/keys
+ssh -T git@github.com              # expect: Hi panfotis!
+```
+
+Clone and update as the **same user** both times, or the pull fails with an
+error that reads like the repository disappeared:
+
+```bash
+git clone --recurse-submodules git@github.com:panfotis/flatcms-demo-site.git
+git pull && composer install --no-dev -o     # to update, later
+```

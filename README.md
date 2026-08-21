@@ -40,12 +40,12 @@ Never edit files in `vendor/`; Composer updates replace them.
 Setup steps for all three are in the engine README's "Cloudflare setup"
 section (`vendor/dopamine/flatcms/README.md`).
 
-`nginx.conf.example` and `apache.conf.example` in this directory are **web
-server virtual hosts** — nothing here reads them. Copy one to the server's
-config directory (`/etc/nginx/sites-available/`, `/etc/apache2/sites-available/`)
-and edit the certificate path and the php-fpm socket; the domain and deploy
-root are already filled in. DDEV writes its own vhost, so locally you need
-neither file.
+`nginx.conf.example` is a **web server virtual host** — nothing here reads it.
+Copy it to `/etc/nginx/sites-available/` and edit the certificate path, the
+php-fpm socket and the deploy paths. DDEV writes its own vhost, so locally you
+do not need it at all. An Apache variant, should this ever move off nginx, is
+in the skeleton repo (`panfotis/dopamine-flatcms-skeleton`); it is not shipped
+inside the Composer package.
 
 Run the health check from the site root with:
 
@@ -53,12 +53,16 @@ Run the health check from the site root with:
 bin/doctor
 ```
 
-The `bin/` wrappers also expose deploy, rollback, backup, restore drill, form
-retry, and retention jobs while keeping their implementation in the versioned
-engine package.
+The remaining `bin/` wrappers expose backup, restore drill, form retry and
+retention jobs, keeping their implementation in the versioned engine package.
+They stay dormant until `content/` has its own git remote and the contact form
+has `FORM_TO`/`MAIL_DSN` set.
 
-For a private VCS package, add the engine and skeleton repositories to your
-global or project Composer configuration before running `create-project`.
+`bin/deploy.sh` and `bin/rollback.sh` are deliberately **not** here. They drive
+the atomic-release layout, and `deploy.sh` fetches a revision with
+`git clone --no-checkout` plus `git checkout -- .` — which never initialises
+submodules, so `theme/` would land empty on every release. This site deploys
+with `git pull`; see "On a server" below.
 
 ---
 
@@ -115,7 +119,3 @@ ROLES_FILE=/srv/theme-demo-content/roles.yml
 ```
 
 Then updating the site is `git pull && composer install --no-dev -o`.
-
-`bin/deploy.sh` and its atomic-release layout are **not** used here: it fetches
-a revision with `git clone --no-checkout` plus `git checkout -- .`, which never
-initialises submodules, so `theme/` would land empty on every release.

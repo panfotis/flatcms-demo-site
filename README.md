@@ -40,12 +40,12 @@ Never edit files in `vendor/`; Composer updates replace them.
 Setup steps for all three are in the engine README's "Cloudflare setup"
 section (`vendor/dopamine/flatcms/README.md`).
 
-`nginx.conf.example` is a **web server virtual host** — nothing here reads it.
-Copy it to `/etc/nginx/sites-available/` and edit the certificate path, the
-php-fpm socket and the deploy paths. DDEV writes its own vhost, so locally you
-do not need it at all. An Apache variant, should this ever move off nginx, is
-in the skeleton repo (`panfotis/dopamine-flatcms-skeleton`); it is not shipped
-inside the Composer package.
+`nginx-vhost-additions.conf` is **not** a virtual host — nothing here reads it.
+The server runs CloudPanel, which generates the server block itself, so that
+file holds only the directives to paste into CloudPanel's Vhost editor. DDEV
+writes its own vhost, so locally you do not need it at all. A full standalone
+vhost, for a plain-nginx or Apache box, is in the skeleton repo
+(`panfotis/dopamine-flatcms-skeleton`).
 
 Run the health check from the site root with:
 
@@ -117,7 +117,7 @@ been mid-edit.
    /admin.php (server)
         │
         ▼
-  /srv/…-content/   ← live demo. Flows nowhere. Deliberate.
+  ~/content/   ← live demo, CONTENT_PATH. Flows nowhere. Deliberate.
 ```
 
 `content/` on **this machine** is the source of truth for the demo, and
@@ -134,7 +134,7 @@ If a page authored on the server should become part of the demo, bring it down
 deliberately, then ship from here:
 
 ```bash
-rsync -a <server>:/srv/dopamine-flatcms-demo-content/pages/ content/pages/
+rsync -a <server>:/home/fotispan-dopamine-flatcms-demo/content/pages/ content/pages/
 bin/ship "content: promote the page written on the demo"
 ```
 
@@ -150,27 +150,40 @@ Set `CONTENT_PATH` (and `ROLES_FILE`, to keep real addresses out of the repo)
 in the server's `.env`:
 
 ```
-CONTENT_PATH=/srv/dopamine-flatcms-demo-content
-ROLES_FILE=/srv/dopamine-flatcms-demo-content/roles.yml
+CONTENT_PATH=/home/fotispan-dopamine-flatcms-demo/content
+ROLES_FILE=/home/fotispan-dopamine-flatcms-demo/content/roles.yml
 ```
 
 The checkout keeps its own tracked `content/` directory, which the running site
 then ignores. Harmless, but do not edit it on the server expecting to see a
 change — it is the seed for a fresh install, not the live content.
 
-This repository is **private**, so the server needs an SSH key on the account
-(not a repo deploy key — that would not also reach the `theme` submodule):
+Both repositories are public today, so the server needs no key — but
+`.gitmodules` records the theme over **SSH**, because that is the URL `bin/ship`
+pushes through from a laptop. A server cloning over HTTPS therefore fails on
+`git submodule update` with `Permission denied (publickey)`. Override the
+submodule URL locally, once:
 
 ```bash
-ssh-keygen -t ed25519 -C "flatcms demo server" -f ~/.ssh/id_ed25519 -N ""
-cat ~/.ssh/id_ed25519.pub          # paste into github.com/settings/keys
-ssh -T git@github.com              # expect: Hi panfotis!
+git clone https://github.com/panfotis/flatcms-demo-site.git
+cd flatcms-demo-site
+git config submodule.theme.url https://github.com/panfotis/flatcms-theme-demo.git
+git submodule update --init
+ls theme/components | wc -l                  # 12 — an empty theme/ is the bug below
+composer install --no-dev -o
+git config submodule.recurse true            # plain `git pull` updates the theme too
 ```
 
-Clone and update as the **same user** both times, or the pull fails with an
-error that reads like the repository disappeared:
+Do **not** run `git submodule sync` afterwards; it resets that URL back to SSH.
 
-```bash
-git clone --recurse-submodules git@github.com:panfotis/flatcms-demo-site.git
-git pull && composer install --no-dev -o     # to update, later
-```
+**An empty `theme/` fails silently.** `config.php` resolves the theme through a
+fallback chain, so an uninitialised submodule hands every lookup to the engine's
+own starter theme — the page still renders, just wrong, and any block whose
+component only exists here vanishes. `bin/doctor` names it precisely; run it
+after cloning.
+
+If this repository is ever made private, only `origin` needs an SSH key on the
+GitHub **account** (a repo deploy key is scoped to one repository and would not
+reach the submodule). The theme stays public, so the HTTPS override above keeps
+working. Clone and pull as the same user, or the pull fails with an error that
+reads like the repository disappeared.

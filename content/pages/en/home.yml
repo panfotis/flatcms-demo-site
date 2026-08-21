@@ -107,10 +107,10 @@ blocks:
       heading: 'The client edits only text'
       body: '<p>There is no "add section" button. No drag &amp; drop. The client sees the fields you give them - nothing else. The page you designed stays the page you designed.</p>'
       image:
-        src: /uploads/2026/08/pexels-zetong-li-880728-13724339.jpg
-        alt: 'Mountain landscape at dusk'
-        width: 1920
-        height: 1440
+        src: /uploads/2026/08/pexels-eamadorphotography-7702338.jpg
+        alt: 'Rows of coloured pencils lined up in an open box'
+        width: 2400
+        height: 1600
       media_side: end
   -
     id: faq
@@ -141,15 +141,15 @@ blocks:
       heading: Gallery
       photos:
         -
-          src: /uploads/2026/08/pexels-willianjusten-30929497.jpg
-          alt: 'Person by a lake under dramatic clouds'
-          width: 3859
-          height: 2573
+          src: /uploads/2026/08/pexels-boom-12585758.jpg
+          alt: 'Sharpened coloured pencils lying side by side'
+          width: 1280
+          height: 852
         -
-          src: /uploads/2026/08/pexels-zetong-li-880728-13724339.jpg
-          alt: 'Aerial view of a snowy landscape with golden vegetation'
-          width: 1920
-          height: 1440
+          src: /uploads/2026/08/pexels-lucas-george-wendt-2279952-4519863.jpg
+          alt: 'Coloured pencil tips standing upright'
+          width: 1279
+          height: 803
   -
     id: video
     type: video
@@ -159,12 +159,12 @@ blocks:
         provider: youtube
         id: dQw4w9WgXcQ
       poster:
-        src: /uploads/2026/08/pexels-zetong-li-880728-13724339.jpg
-        alt: 'Still frame from the video'
-        width: 1920
-        height: 1440
+        src: /uploads/2026/08/pexels-lucas-george-wendt-2279952-4519863.jpg
+        alt: 'Coloured pencil tips standing upright'
+        width: 1279
+        height: 803
       loop:
-        src: /uploads/2026/08/284683363-mexican-food-fiesta-family-and-259948.mp4
+        src: /uploads/2026/08/4460023-hd_1280_720_30fps.mp4
         poster:
           src: ''
           alt: ''

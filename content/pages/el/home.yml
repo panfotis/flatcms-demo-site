@@ -107,10 +107,10 @@ blocks:
       heading: 'Ο πελάτης αλλάζει μόνο κείμενα'
       body: '<p>Δεν υπάρχει κουμπί «προσθήκη ενότητας», δεν υπάρχει drag &amp; drop. Ο πελάτης βλέπει μόνο τα πεδία που του έδωσες - τίποτα άλλο. Η σελίδα που σχεδίασες μένει όπως τη σχεδίασες.</p>'
       image:
-        src: /uploads/2026/08/pexels-zetong-li-880728-13724339.jpg
-        alt: 'Ορεινό τοπίο το σούρουπο'
-        width: 1920
-        height: 1440
+        src: /uploads/2026/08/pexels-eamadorphotography-7702338.jpg
+        alt: 'Σειρές από ξυλομπογιές τακτοποιημένες σε ανοιχτή κασετίνα'
+        width: 2400
+        height: 1600
       media_side: end
   -
     id: faq
@@ -141,15 +141,15 @@ blocks:
       heading: Γκαλερί
       photos:
         -
-          src: /uploads/2026/08/pexels-willianjusten-30929497.jpg
-          alt: 'Άνθρωπος μπροστά σε λίμνη κάτω από εντυπωσιακά σύννεφα'
-          width: 3859
-          height: 2573
+          src: /uploads/2026/08/pexels-boom-12585758.jpg
+          alt: 'Ξυσμένες ξυλομπογιές η μία δίπλα στην άλλη'
+          width: 1280
+          height: 852
         -
-          src: /uploads/2026/08/pexels-zetong-li-880728-13724339.jpg
-          alt: 'Αεροφωτογραφία χιονισμένου τοπίου με χρυσαφί βλάστηση'
-          width: 1920
-          height: 1440
+          src: /uploads/2026/08/pexels-lucas-george-wendt-2279952-4519863.jpg
+          alt: 'Όρθιες μύτες από ξυλομπογιές'
+          width: 1279
+          height: 803
   -
     id: video
     type: video
@@ -159,12 +159,12 @@ blocks:
         provider: youtube
         id: dQw4w9WgXcQ
       poster:
-        src: /uploads/2026/08/pexels-zetong-li-880728-13724339.jpg
-        alt: 'Στιγμιότυπο από το βίντεο'
-        width: 1920
-        height: 1440
+        src: /uploads/2026/08/pexels-lucas-george-wendt-2279952-4519863.jpg
+        alt: 'Όρθιες μύτες από ξυλομπογιές'
+        width: 1279
+        height: 803
       loop:
-        src: /uploads/2026/08/284683363-mexican-food-fiesta-family-and-259948.mp4
+        src: /uploads/2026/08/4460023-hd_1280_720_30fps.mp4
         poster:
           src: ''
           alt: ''

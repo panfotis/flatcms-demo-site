@@ -44,10 +44,10 @@ blocks:
       heading: 'The Dopamine family'
       body: '<p>The look of this demo comes from <a href="https://panfotis.github.io/dopamine-fluid-css/">Dopamine Fluid</a> - a fluid CSS utility library by the same author. Class name equals spec: typography, spacing and grids that scale smoothly from mobile to ultrawide, with zero runtime.</p>'
       image:
-        src: /uploads/2026/08/pexels-willianjusten-30929497.jpg
-        alt: 'Person by a lake under dramatic clouds'
-        width: 3859
-        height: 2573
+        src: /uploads/2026/08/pexels-boom-12585758.jpg
+        alt: 'Sharpened coloured pencils lying side by side'
+        width: 1280
+        height: 852
       media_side: start
   -
     id: license

@@ -44,10 +44,10 @@ blocks:
       heading: 'Η οικογένεια Dopamine'
       body: '<p>Η εμφάνιση του demo βασίζεται στο <a href="https://panfotis.github.io/dopamine-fluid-css/">Dopamine Fluid</a> - μια fluid CSS utility βιβλιοθήκη από τον ίδιο δημιουργό. Το όνομα της class είναι και το spec της: τυπογραφία, αποστάσεις και grids που κλιμακώνονται ομαλά από το κινητό ώς την ultrawide, με μηδενικό runtime.</p>'
       image:
-        src: /uploads/2026/08/pexels-willianjusten-30929497.jpg
-        alt: 'Άνθρωπος μπροστά σε λίμνη κάτω από εντυπωσιακά σύννεφα'
-        width: 3859
-        height: 2573
+        src: /uploads/2026/08/pexels-boom-12585758.jpg
+        alt: 'Ξυσμένες ξυλομπογιές η μία δίπλα στην άλλη'
+        width: 1280
+        height: 852
       media_side: start
   -
     id: license

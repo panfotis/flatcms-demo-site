@@ -150,6 +150,11 @@ blocks:
           alt: 'Coloured pencil tips standing upright'
           width: 1279
           height: 803
+        -
+          src: /uploads/2026/08/pexels-eamadorphotography-7702338.jpg
+          alt: 'Rows of coloured pencils lined up in an open box'
+          width: 2400
+          height: 1600
   -
     id: video
     type: video

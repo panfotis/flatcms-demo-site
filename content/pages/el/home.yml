@@ -150,6 +150,11 @@ blocks:
           alt: 'Όρθιες μύτες από ξυλομπογιές'
           width: 1279
           height: 803
+        -
+          src: /uploads/2026/08/pexels-eamadorphotography-7702338.jpg
+          alt: 'Σειρές από ξυλομπογιές τακτοποιημένες σε ανοιχτή κασετίνα'
+          width: 2400
+          height: 1600
   -
     id: video
     type: video

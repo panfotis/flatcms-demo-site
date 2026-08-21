@@ -59,3 +59,63 @@ engine package.
 
 For a private VCS package, add the engine and skeleton repositories to your
 global or project Composer configuration before running `create-project`.
+
+---
+
+## Working on this demo
+
+`theme/` is a **submodule** of
+[panfotis/flatcms-theme-demo](https://github.com/panfotis/flatcms-theme-demo) —
+it keeps its own history and is published on its own. A fresh clone therefore
+needs the submodule, and two local settings that git does not carry in a repo:
+
+```bash
+git clone --recurse-submodules git@github.com:panfotis/flatcms-demo-site.git
+cd flatcms-demo-site
+git config push.recurseSubmodules on-demand   # one `git push` pushes both repos
+git config submodule.recurse true             # one `git pull` updates both
+ddev start
+ddev launch /admin.php
+```
+
+### Shipping
+
+```bash
+bin/ship "hero: bigger type"
+```
+
+One command, in this order:
+
+1. `bin/doctor` — refuses to ship a site that does not validate
+2. refreshes `theme/_demo-content/` from `content/`
+3. commits the theme repo, then this one
+4. pushes both
+
+**`content/` is the source of truth for the demo pages.** `theme/_demo-content/`
+is the copy someone gets when they clone the theme, and nothing else syncs it —
+it has drifted before. `bin/ship` rsyncs `pages/` and `uploads/` across with
+`--delete`, so a page you removed here disappears there too. `.revisions/` is
+never copied and is not tracked in this repo.
+
+The catch: `content/` is your live working copy, so whatever is in it when you
+ship becomes the theme's starter content. `bin/doctor` catches broken YAML, not
+a half-written page. `git -C theme status --short` before shipping if you have
+been mid-edit.
+
+### On a server
+
+The panel writes to `content/`, so on a server that directory must live
+**outside the checkout** — otherwise every `git pull` collides with the client's
+edits. Set `CONTENT_PATH` (and `ROLES_FILE`, to keep real addresses out of a
+public repo) in the server's `.env`:
+
+```
+CONTENT_PATH=/srv/theme-demo-content
+ROLES_FILE=/srv/theme-demo-content/roles.yml
+```
+
+Then updating the site is `git pull && composer install --no-dev -o`.
+
+`bin/deploy.sh` and its atomic-release layout are **not** used here: it fetches
+a revision with `git clone --no-checkout` plus `git checkout -- .`, which never
+initialises submodules, so `theme/` would land empty on every release.

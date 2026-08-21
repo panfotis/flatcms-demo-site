@@ -144,19 +144,50 @@ live in the bucket and are referenced by absolute URL, so they are not in
 
 ### On a server
 
-The panel writes to `content/`, so on a server that directory must live
-**outside the checkout** — otherwise every `git pull` collides with the edits.
-Set `CONTENT_PATH` (and `ROLES_FILE`, to keep real addresses out of the repo)
-in the server's `.env`:
+**There is no `.env` in a fresh clone — create it.** It is gitignored, so
+nothing brings it down for you, and without it the site runs on defaults that
+are wrong for a server: every canonical URL, every `og:url` and the whole
+sitemap publish `http://localhost:8080`.
 
-```
+The panel writes to `content/`, so that directory has to live **outside the
+checkout** — otherwise the first page saved in `/admin.php` makes the next
+`git pull` refuse to run. Copy it out once, then point `.env` at it:
+
+```bash
+mkdir -p ~/content
+cp -R content/. ~/content/
+cp config/roles.yml ~/content/roles.yml     # put the real address in this copy
+
+cat > .env <<'EOF'
+SITE_BASE_URL=https://dopamine-flatcms-demo.fotispan.gr
 CONTENT_PATH=/home/fotispan-dopamine-flatcms-demo/content
 ROLES_FILE=/home/fotispan-dopamine-flatcms-demo/content/roles.yml
+ADMIN_LOCALE=en
+EOF
+
+bin/doctor
 ```
 
-The checkout keeps its own tracked `content/` directory, which the running site
-then ignores. Harmless, but do not edit it on the server expecting to see a
-change — it is the seed for a fresh install, not the live content.
+`CONTENT_PATH` must match the `/uploads/` alias in the vhost exactly, trailing
+slash included. They are two routes to one directory — PHP resolves images
+through `img.php`, the browser fetches videos straight off the path — so a
+mismatch shows up as working images and a missing video, not as an obvious
+break.
+
+The checkout keeps its own tracked `content/`, which the running site then
+ignores once `CONTENT_PATH` is set. That copy is the **seed**: it is what
+`git pull` updates when the demo gains a page or an image, and it does not
+reach the live directory on its own. Bring changes across deliberately:
+
+```bash
+git pull && composer install --no-dev -o
+cp -R content/pages/. ~/content/pages/      # only when the seed actually changed
+cp -R content/uploads/. ~/content/uploads/
+```
+
+Pages written in the panel on the server stay on the server; `bin/ship` never
+publishes them. That is the trade the split buys — the panel is free to write,
+and deploys are free to run.
 
 Both repositories are public today, so the server needs no key — but
 `.gitmodules` records the theme over **SSH**, because that is the URL `bin/ship`

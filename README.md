@@ -13,7 +13,8 @@ ddev launch /admin.php
 The engine lives in `vendor/dopamine/flatcms`. Site-owned files live here:
 
 - `theme/` is the site: layouts, components, `theme.yml` (global CSS/JS,
-  local or CDN) and `assets/`. Any file here overrides the engine's copy.
+  local or CDN) and `assets/`. Everything in `theme/` is this site's own;
+  the engine keeps only `@flatcms/…` (head, picture, video facade).
 - `admin-theme/` brands the panel — `assets/css/admin.css` is the supported
   surface; overriding panel templates tracks engine internals.
 - `content/` contains pages, globals, revisions, and uploads.
@@ -207,11 +208,10 @@ git config submodule.recurse true            # plain `git pull` updates the them
 
 Do **not** run `git submodule sync` afterwards; it resets that URL back to SSH.
 
-**An empty `theme/` fails silently.** `config.php` resolves the theme through a
-fallback chain, so an uninitialised submodule hands every lookup to the engine's
-own starter theme — the page still renders, just wrong, and any block whose
-component only exists here vanishes. `bin/doctor` names it precisely; run it
-after cloning.
+**An empty `theme/` fails loudly.** There is no engine theme underneath any
+more: an uninitialised submodule means `layout.twig` resolves nowhere, and both
+`bin/doctor` and the first render say so by name instead of serving a
+placeholder site. Run doctor after cloning.
 
 If this repository is ever made private, only `origin` needs an SSH key on the
 GitHub **account** (a repo deploy key is scoped to one repository and would not

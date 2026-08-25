@@ -33,3 +33,6 @@ var/submissions/
 # Superseded by theme/demo.pen, which is larger, newer, and the copy the theme
 # repo publishes. Kept on disk rather than deleted until it is confirmed dead.
 /demo.pen
+
+# Generated asset bundles: content-addressed, rebuilt on demand.
+/public/assets/

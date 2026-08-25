@@ -85,16 +85,16 @@
         },
         {
             "name": "dopamine/flatcms",
-            "version": "v3.2.0",
+            "version": "v3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/panfotis/dopamine-flatcms.git",
-                "reference": "a96ad43bc53b8e6caf60cd13c539d25af05a3d4b"
+                "reference": "b8d2225ce81dd574ce8f211f59f6079a17c5b104"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/panfotis/dopamine-flatcms/zipball/a96ad43bc53b8e6caf60cd13c539d25af05a3d4b",
-                "reference": "a96ad43bc53b8e6caf60cd13c539d25af05a3d4b",
+                "url": "https://api.github.com/repos/panfotis/dopamine-flatcms/zipball/b8d2225ce81dd574ce8f211f59f6079a17c5b104",
+                "reference": "b8d2225ce81dd574ce8f211f59f6079a17c5b104",
                 "shasum": ""
             },
             "require": {
@@ -135,9 +135,9 @@
             "description": "Flat-file CMS for small client sites. Locked components, text-only editing, Cloudflare Access auth, R2 media, edge cache purge.",
             "support": {
                 "issues": "https://github.com/panfotis/dopamine-flatcms/issues",
-                "source": "https://github.com/panfotis/dopamine-flatcms/tree/v3.2.0"
+                "source": "https://github.com/panfotis/dopamine-flatcms/tree/v3.2.1"
             },
-            "time": "2026-08-25T03:51:42+00:00"
+            "time": "2026-08-25T04:24:26+00:00"
         },
         {
             "name": "egulias/email-validator",
